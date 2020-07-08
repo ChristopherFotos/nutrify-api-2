@@ -112,7 +112,7 @@ router.post('/save', checkAuth, (req, res) => {
 
     const recipe = new Recipe({
         _id: new mongoose.Types.ObjectId(),
-        ingredientLines: req.body.ingr,
+        ingredientLines: req.body.ingredientLines,
         img: req.body.img,
         label: req.body.label
     })
