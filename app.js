@@ -5,6 +5,7 @@ const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 const cors = require("cors");
 const mongoose = require('mongoose')
 app.use(cors());
@@ -25,21 +26,12 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use('/uploads', express.static('uploads'))
-app.use(express.static('public'))
-app.use(express.static('public/build'))
+app.use('/uploads', express.static('uploads'));
+app.use(express.static('public'));
+app.use(express.static('public/build'));
+app.use(cookieParser());
 
-// Handling CORS errors and OPTIONS request
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*')
-//     res.header('Access-Control-Allow-Headers',
-//         'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//     if (req.method === 'OPTIONS') {
-//         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-//         return res.status(200).json({})
-//     }
-//     next()
-// })
+
 app.use(cors());
 
 // Set up the products and orders routes

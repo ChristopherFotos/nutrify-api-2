@@ -88,10 +88,10 @@ router.post('/login', (req, res, next) => {
                             expiresIn: '1h'
                         },
                     );
-                    return res.status(200).json({
-                        message: 'Authentication successful',
-                        token: token
-                    })
+                    // This response now includes a cookie which contains our access token.   
+                    return res.cookie(
+                        'access_token', token, { domain: 'localhost', httpOnly: true }
+                    ).sendStatus(200)
                 }
                 res.status(401).json({
                     message: 'Authentication failed'
